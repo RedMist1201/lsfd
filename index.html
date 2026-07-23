@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>LSFD - Los Santos Fire Department</title>
+
+    <!-- Google Font: Orbitron -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <style>
+        /* ---------- RESET ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Orbitron', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: radial-gradient(ellipse at center, #0f0f0f 0%, #050505 100%);
+        }
+
+        /* ---------- ANIMATSIOONID ---------- */
+        @keyframes pulseGlow {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(200, 30, 30, 0.3)); }
+            50% { filter: drop-shadow(0 0 60px rgba(200, 30, 30, 0.7)) drop-shadow(0 0 100px rgba(200, 30, 30, 0.2)); }
+        }
+
+        @keyframes zoomIn {
+            0% { opacity: 0; transform: scale(0.6) translateY(60px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+
+        /* ---------- ÜLDINE ---------- */
+        #hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            width: 100%;
+            max-width: 990px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        /* --- MAIN LEHT: VERTIKAALNE (logo peal, tekst all) --- */
+        #hero .hero-left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.8s ease;
+        }
+
+        #hero .logo-icon {
+            animation: pulseGlow 3s infinite, float 4s ease-in-out infinite;
+            margin-bottom: 16px;
+            transition: all 0.8s ease;
+        }
+
+        #hero .logo-icon img {
+            width: 180px;
+            height: auto;
+            display: block;
+        }
+
+        #hero h1 {
+            font-weight: 900;
+            font-size: 56px;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: #ffffff;
+            transition: all 0.8s ease;
+        }
+
+        #hero h1 span {
+            color: #cc0000;
+        }
+
+        #hero .subtitle {
+            font-weight: 400;
+            font-size: 16px;
+            letter-spacing: 6px;
+            color: #666;
+            margin-top: 8px;
+            transition: all 0.8s ease;
+        }
+
+        #hero .badge-hero {
+            display: inline-block;
+            margin-top: 16px;
+            background: #cc0000;
+            color: #0a0a0a;
+            font-weight: 700;
+            font-size: 12px;
+            padding: 8px 32px;
+            border-radius: 4px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            box-shadow: 0 0 40px rgba(200, 0, 0, 0.2);
+            transition: all 0.8s ease;
+        }
+
+        /* ---------- HERO VÄIKE REŽIIM (header) ---------- */
+        #hero.compact {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 20px;
+            max-width: 100%;
+            width: 100%;
+            min-height: auto;
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 2px solid #1a0a0a;
+            backdrop-filter: blur(12px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 40px rgba(0,0,0,0.8);
+            margin: 0;
+        }
+
+        /* --- HEADER: HORISONTAALNE (logo + tekst kõrvuti) --- */
+        #hero.compact .hero-left {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #hero.compact .logo-icon {
+            animation: pulseGlow 3s infinite;
+            margin-bottom: 0;
+        }
+
+        #hero.compact .logo-icon img {
+            width: 50px;
+            height: auto;
+            display: block;
+        }
+
+        #hero.compact h1 {
+            font-size: 18px;
+            letter-spacing: 3px;
+        }
+
+        #hero.compact .subtitle,
+        #hero.compact .badge-hero {
+            display: none;
+        }
+
+        /* ---------- HERO MENÜÜ NUPPUD ---------- */
+        .hero-menu {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 30px;
+            transition: all 0.8s ease;
+        }
+
+        #hero.compact .hero-menu {
+            margin-top: 0;
+            gap: 4px;
+        }
+
+        .hero-menu button {
+            background: transparent;
+            border: 1px solid #2a2a2a;
+            color: #aaaaaa;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 10px 22px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-menu button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(200, 0, 0, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .hero-menu button:hover::before {
+            left: 100%;
+        }
+
+        .hero-menu button:hover {
+            border-color: #cc0000;
+            color: #ffffff;
+            box-shadow: 0 0 30px rgba(200, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .hero-menu button i {
+            margin-right: 10px;
+            color: #cc0000;
+        }
+
+        #hero.compact .hero-menu button {
+            font-size: 9px;
+            padding: 6px 12px;
+            letter-spacing: 1px;
+        }
+
+        #hero.compact .hero-menu button i {
+            margin-right: 4px;
+            font-size: 10px;
+        }
+
+        /* ---------- SISU VAIK ---------- */
+        #content-area {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 120px 20px 60px;
+            display: none;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        #content-area.active {
+            display: block;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        #content-area.hiding {
+            opacity: 0;
+            transform: scale(0.85);
+            pointer-events: none;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        #content-area.hidden {
+            display: none !important;
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        .content-card {
+            background: linear-gradient(145deg, #0d0d0d, #151515);
+            border-radius: 8px;
+            padding: 40px 45px;
+            border-left: 5px solid #cc0000;
+            box-shadow: 0 8px 48px rgba(0, 0, 0, 0.6);
+            animation: zoomIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .content-card h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 28px;
+            color: #ffffff;
+            margin-bottom: 22px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .content-card h2 i {
+            color: #cc0000;
+            font-size: 30px;
+        }
+
+        .content-card h2::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, #cc0000, transparent);
+            margin-left: 10px;
+        }
+
+        .content-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            font-size: 17px;
+            color: #cc0000;
+            margin: 22px 0 12px 0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .content-card p,
+        .content-card li {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 400;
+            color: #c0c0c0;
+            line-height: 1.9;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        .content-card ul,
+        .content-card ol {
+            padding-left: 28px;
+            margin: 10px 0;
+        }
+
+        .content-card li {
+            margin-bottom: 8px;
+        }
+
+        .content-card li strong {
+            color: #ffffff;
+        }
+
+        .content-card .highlight-box {
+            background: #0f0f0f;
+            border: 1px solid #1f1f1f;
+            border-left: 4px solid #cc0000;
+            padding: 18px 24px;
+            margin: 18px 0;
+            border-radius: 4px;
+        }
+
+        .content-card .highlight-box i {
+            color: #cc0000;
+            margin-right: 10px;
+        }
+
+        .content-card .highlight-box code {
+            color: #cc0000;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            background: #1a1a1a;
+            padding: 2px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+        /* Auastmed */
+        .rank-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 14px;
+            margin: 16px 0;
+        }
+
+        .rank-item {
+            background: #0a0a0a;
+            padding: 16px 20px;
+            border-radius: 6px;
+            border-left: 4px solid #cc0000;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .rank-item:hover {
+            background: #141414;
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(200, 0, 0, 0.1);
+        }
+
+        .rank-item strong {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 15px;
+            letter-spacing: 1px;
+        }
+
+        .rank-item small {
+            display: block;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 400;
+            color: #888;
+            font-size: 11px;
+            margin-top: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Käsud */
+        .code-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 10px;
+            margin: 12px 0;
+        }
+
+        .code-item {
+            background: #0a0a0a;
+            padding: 12px 16px;
+            border-radius: 4px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            border: 1px solid #1a1a1a;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .code-item:hover {
+            border-color: #cc0000;
+            box-shadow: 0 0 20px rgba(200, 0, 0, 0.1);
+        }
+
+        .code-item span {
+            color: #cc0000;
+            font-weight: 700;
+        }
+
+        /* Värbamine */
+        .recruit-box {
+            background: linear-gradient(135deg, #0a0a0a, #1a0505);
+            border: 2px solid #cc0000;
+            border-radius: 8px;
+            padding: 28px 32px;
+            text-align: center;
+            box-shadow: 0 0 60px rgba(200, 0, 0, 0.05);
+        }
+
+        .recruit-box i {
+            font-size: 48px;
+            color: #cc0000;
+            margin-bottom: 16px;
+            animation: pulseGlow 3s infinite;
+        }
+
+        .recruit-box h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .recruit-box p {
+            font-size: 14px;
+            color: #aaaaaa;
+            max-width: 600px;
+            margin: 12px auto 0;
+        }
+
+        .recruit-box .highlight {
+            color: #cc0000;
+            font-weight: 700;
+        }
+
+        /* ---------- TAGASI NUPP ---------- */
+        .back-btn {
+            background: transparent;
+            border: 1px solid #2a2a2a;
+            color: #888;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 10px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .back-btn:hover {
+            border-color: #cc0000;
+            color: #ffffff;
+            box-shadow: 0 0 30px rgba(200, 0, 0, 0.1);
+        }
+
+        .back-btn i {
+            margin-right: 10px;
+            color: #cc0000;
+        }
+
+        /* ---------- FOOTER ---------- */
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            border-top: 1px solid #111;
+        }
+
+        footer p {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 400;
+            font-size: 10px;
+            letter-spacing: 3px;
+            color: #333;
+            text-transform: uppercase;
+        }
+
+        footer p i {
+            color: #cc0000;
+            margin: 0 6px;
+        }
+
+        /* ---------- RESPONSIIVSUS ---------- */
+        @media (max-width: 768px) {
+            #hero h1 { font-size: 32px; letter-spacing: 4px; }
+            #hero .logo-icon img { width: 130px; }
+            .hero-menu button { font-size: 10px; padding: 8px 14px; }
+            #hero.compact h1 { font-size: 14px; letter-spacing: 2px; }
+            #hero.compact .logo-icon img { width: 38px; }
+            #hero.compact .hero-menu button { font-size: 7px; padding: 4px 8px; letter-spacing: 0.5px; }
+            .content-card { padding: 24px 18px; }
+            .content-card h2 { font-size: 20px; flex-wrap: wrap; }
+            .rank-grid { grid-template-columns: 1fr; }
+            .code-grid { grid-template-columns: 1fr 1fr; }
+            #hero.compact { padding: 8px 12px; flex-wrap: wrap; gap: 6px; }
+            #hero.compact .hero-left { flex-wrap: wrap; gap: 8px; }
+            #hero { min-height: 90vh; padding: 20px; }
+        }
+
+        @media (max-width: 480px) {
+            #hero h1 { font-size: 20px; letter-spacing: 2px; }
+            #hero .logo-icon img { width: 90px; }
+            .code-grid { grid-template-columns: 1fr; }
+            .hero-menu { gap: 6px; }
+            .hero-menu button { font-size: 8px; padding: 6px 10px; letter-spacing: 1px; }
+            #hero.compact .hero-menu button { font-size: 6px; padding: 3px 6px; letter-spacing: 0px; }
+            #hero.compact h1 { font-size: 12px; letter-spacing: 1px; }
+            #hero.compact .logo-icon img { width: 30px; }
+            .content-card { padding: 16px 12px; }
+            .content-card h2 { font-size: 16px; }
+            .content-card p, .content-card li { font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HERO (keskel) ===== -->
+    <div id="hero">
+        <div class="hero-left">
+            <div class="logo-icon">
+                <img src="logo.png" alt="LSFD Logo" />
+            </div>
+            <h1>Los Santos <span>Fire Department</span></h1>
+        </div>
+        <span class="badge-hero"><i class="fas fa-shield-alt"></i> Esimesed rindel · Viimased kes lahkuvad <i class="fas fa-shield-alt"></i> </span>
+        <div class="hero-menu">
+            <button data-section="mission"><i class="fas fa-bullseye"></i> Eesmärgid</button>
+            <button data-section="rules"><i class="fas fa-gavel"></i> Aukoodeks</button>
+            <button data-section="ranks"><i class="fas fa-chevron-up"></i> Struktuur</button>
+            <button data-section="procedures"><i class="fas fa-clipboard-list"></i> Protseduurid</button>
+            <button data-section="commands"><i class="fas fa-terminal"></i> Käsud</button>
+            <button data-section="equipment"><i class="fas fa-truck"></i> Varustus</button>
+            <button data-section="recruitment"><i class="fas fa-user-plus"></i> Värbamine</button>
+        </div>
+    </div>
+
+    <!-- ===== SISU VAIK ===== -->
+    <div id="content-area" class="hidden">
+        <button class="back-btn" id="backBtn"><i class="fas fa-arrow-left"></i> Tagasi</button>
+        <div id="content-display" class="content-card">
+            <!-- Sisud laaditakse siia JavaScriptiga -->
+        </div>
+        <footer>
+            <p><i class="fas fa-fire-extinguisher"></i> LSFD · DISAIN - RED MIST <i class="fas fa-circle" style="font-size:6px;"></i>BREAKING LOS SANTOS</p>
+        </footer>
+    </div>
+
+    <script>
+        // ===== SISU ANDMED =====
+        var contentData = {
+            mission: {
+                title: 'Eesmärgid',
+                icon: 'fa-bullseye',
+                html: '<p><strong style="color:#cc0000;">LSFD</strong> on Los Santose esimene kaitseliin. Meie jaoks pole ükski ülesanne keeruline</p><p>Oleme meeskond oma ala professionaale, kelle jaoks on linnaelanike turvalisus prioriteet number 1</p><div class="highlight-box"><i class="fas fa-quote-left"></i><em style="color:#cc0000; font-weight:600;">"ESIMESED RINDEL - VIIMASED KES LAHKUVAD"</em></div><ul><li><strong style="color:#cc0000;">Vaprus</strong> — astume ohtudele vastu, et teised saaksid elada</li><li><strong style="color:#cc0000;">Abivalmidus </strong> — Oleme valmis aitama kõiki, kes meie abi vajavad</li><li><strong style="color:#cc0000;">Pühendumus</strong> — Anname endast alati maksimumi, sõltumata olukorra keerukusest</li><li><strong style="color:#cc0000;">Professionaalsus</strong> — Töötame ühtse ja usaldusväärse meeskonnana, kus iga liige toetab teisi</li></ul>'
+            },
+            rules: {
+                title: 'Aukoodeks',
+                icon: 'fa-gavel',
+                html: '<ul><li><strong style="color:#cc0000;">AUSTAN OMA AMETIT</strong> - Kannan LSFD vormi uhkusega ning esindan organisatsiooni väärikalt nii tööl olles kui ka väljaspool</li><li><strong style="color:#cc0000;">KAITSEN ELU</strong> - Minu peamine eesmärk on päästa elusid ja tagada inimeste ohutus</li><li><strong style="color:#cc0000;">JULGUS & ENESEVALITSUS</strong> - Ohtlikes olukordades säilitan külma närvi ning tegutsen läbimõeldult, seadmata ohtu kaaslasi ega kannatanuid</li><li><strong style="color:#cc0000;">AUSUS & ÕIGLUS</strong> - Ei kuritarvita oma ametipositsiooni ega usaldust mis sellega kaasneb</li><li><strong style="color:#cc0000;">PROFESSIONAALSUS</strong> - Kohtlen iga inimest võrdselt, sõltumata tema taustast, ametist või olukorrast. Austan ka teisi riigiasutusi ning teen nendega pidevat koostööd. Käitun ka igas olukorras väärikalt ja rahulikult. Minu suhtumine kujundab LSFD mainet</li><li><strong style="color:#cc0000;">KONFIDENTSIAALSUS</strong> - Ma ei avalda töö käigus saadud tundlikku teavet isikutele, kellel puudub selleks õigus</li><li><strong style="color:#cc0000;">ERAPOOLETUS</strong> - Teen oma tööd objektiivselt ning ei lase isiklikel suhetel, huvidel ega eelarvamustel mõjutada oma otsuseid</li></ul>'
+            },
+            ranks: {
+                title: 'Struktuur',
+                icon: 'fa-chevron-up',
+                html: '<h3><i class="fas fa-user-secret" style="color:#cc0000;"></i> JUHTKOND · KUTSUNG ALPHA</h3><div class="rank-grid"><div class="rank-item"><strong>A-01 Jackson Hendry</strong> <small>Chief of Department · Osakonna juht · Vastutab kogu LSFD tegevuse, juhtimise ja arendamise eest</small></div><div class="rank-item"><strong>A-02 ...</strong> <small>Deputy Chief · Chiefi asetäitja · Juhib osakonda Chiefi puudumisel ning koordineerib suuremaid operatsioone</small></div></div><div class="rank-grid"><div class="rank-item"><strong>A-03 ...</strong> <small>FTO Chief · Vastutab väljaõppe, akadeemia, instruktorite ja uute liikmete koolitamise eest</small></div><div class="rank-item"><strong>A-04 ....</strong> <small>Battalion Chief · Juhib operatiivtegevust · Jälgib meeskondade tööd ning vastutab sündmuste juhtimise eest</small></div></div><h3><i class="fas fa-user-secret" style="color:#cc0000;"></i> OHVITSERID · KUTSUNG LIMA</h3><div class="rank-grid"><div class="rank-item"><strong>L-05 ....</strong> <small>Captain - Päästekompanii juht · Korraldab vahetusi · Juhendab liikmeid ning teeb edutamise ettepanekuid</small></div><div class="rank-item"><strong>L-06 ....</strong> <small>Lieutenant · Vahetuse juht · Vastutab igapäevase töökorralduse ja meeskonna juhtimise eest</small></div></div><div class="rank-grid"><div class="rank-item"><strong>L-07 ...</strong> <small>Lead FTO · A-03 asetäitja · Korraldab õppuseid, hindamisi ja koolitusi · Jälgib aktiivselt FTO tööeetikat</small></div><div class="rank-item"><strong>L-08 ...</strong> <small>Field Training Officer · Tegeleb lisaks operatiivtööle ka liikmete treenimisega</small></div><div class="rank-item"><strong>L-09 ...</strong> <small>Field Training Officer · Tegeleb lisaks operatiivtööle ka liikmete treenimisega</small></div></div><h3><i class="fas fa-user-secret" style="color:#cc0000;"></i> OPERATIIVPERSONAL · KUTSUNG FOXTROT</h3><div class="rank-grid"><div class="rank-item"><strong>F-10 ...</strong> <small>Senior Firefighter · Kogenud päästja · Eeskujuks noorematele liikmetele ning toetab vahetuse juhtkonda igapäevases töös</small></div><div class="rank-item"><strong>F-11 ...</strong> <small>Senior Firefighter · Kogenud päästja · Eeskujuks noorematele liikmetele ning toetab vahetuse juhtkonda igapäevases töös</small></div><div class="rank-item"><strong>F-12 ...</strong> <small>Senior Firefighter · Kogenud päästja · Eeskujuks noorematele liikmetele ning toetab vahetuse juhtkonda igapäevases töös</small></div></div><div class="rank-grid"><div class="rank-item"><strong>F-13 ....</strong> <small>Firefighter II · Kogemustega päästja · Omab vajalike teadmisi ja kogemust iseseisvaks operatiivtööks</small></div><div class="rank-item"><strong>F-14 ....</strong> <small>Firefighter II · Kogemustega päästja · Omab vajalike teadmisi ja kogemust iseseisvaks operatiivtööks</small></div><div class="rank-item"><strong>F-15 ....</strong> <small>Firefighter II · Kogemustega päästja · Omab vajalike teadmisi ja kogemust iseseisvaks operatiivtööks</small></div><div class="rank-item"><strong>F-16 ....</strong> <small>Firefighter II · Kogemustega päästja · Omab vajalike teadmisi ja kogemust iseseisvaks operatiivtööks</small></div></div><div class="rank-grid"><div class="rank-item"><strong>F-17 ....</strong> <small>Firefighter II · Kogemustega päästja · Omab vajalike teadmisi ja kogemust iseseisvaks operatiivtööks</small></div><div class="rank-item"><strong>F-18 ....</strong> <small>Firefighter II · Kogemustega päästja · Omab vajalike teadmisi ja kogemust iseseisvaks operatiivtööks</small></div><div class="rank-item"><strong>F-19 ....</strong> <small>Firefighter II · Kogemustega päästja · Omab vajalike teadmisi ja kogemust iseseisvaks operatiivtööks</small></div><div class="rank-item"><strong>F-20 ....</strong> <small>Firefighter II · Kogemustega päästja · Omab vajalike teadmisi ja kogemust iseseisvaks operatiivtööks</small></div></div><div class="rank-grid"><div class="rank-item"><strong>F-21 ....</strong> <small>Firefighter II · Kogemustega päästja · Omab vajalike teadmisi ja kogemust iseseisvaks operatiivtööks</small></div><div class="rank-item"><strong>F-22 ....</strong> <small>Firefighter II · Kogemustega päästja · Omab vajalike teadmisi ja kogemust iseseisvaks operatiivtööks</small></div><div class="rank-item"><strong>F-23 ....</strong> <small>Firefighter II · Kogemustega päästja · Omab vajalike teadmisi ja kogemust iseseisvaks operatiivtööks</small></div><div class="rank-item"><strong>F-24 ....</strong> <small>Firefighter II · Kogemustega päästja · Omab vajalike teadmisi ja kogemust iseseisvaks operatiivtööks</small></div></div><div class="rank-grid"><div class="rank-item"><strong>F-25 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div><div class="rank-item"><strong>F-26 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div><div class="rank-item"><strong>F-27 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div><div class="rank-item"><strong>F-28 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div></div><div class="rank-grid"><div class="rank-item"><strong>F-29 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div><div class="rank-item"><strong>F-30 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div><div class="rank-item"><strong>F-31 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div><div class="rank-item"><strong>F-32 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div></div><div class="rank-grid"><div class="rank-item"><strong>F-33 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div><div class="rank-item"><strong>F-34 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div><div class="rank-item"><strong>F-35 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div><div class="rank-item"><strong>F-36 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div></div><div class="rank-grid"><div class="rank-item"><strong>F-37 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div><div class="rank-item"><strong>F-38 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div><div class="rank-item"><strong>F-39 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div><div class="rank-item"><strong>F-40 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div></div><h3><i class="fas fa-user-secret" style="color:#cc0000;"></i> KATSEAJAL OPERATIIVPERSONAL · KUTSUNG FOXTROT</h3><div class="rank-grid"><div class="rank-item"><strong>F-41 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-42 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-43 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-44 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div></div><div class="rank-grid"><div class="rank-item"><strong>F-45 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-46 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-47 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-48 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div></div><div class="rank-grid"><div class="rank-item"><strong>F-49 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-50 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-51 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-52 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div></div><div class="rank-grid"><div class="rank-item"><strong>F-53 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-54 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-55 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-56 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div></div><div class="rank-grid"><div class="rank-item"><strong>F-57 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-58 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-59 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-60 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div></div><p style="font-size:13px; color:#888; text-align:center;">Edutamine toimub aktiivsuse, oskuste ja hoiaku alusel.</p>'
+            },
+            procedures: {
+                title: 'Protseduurid',
+                icon: 'fa-clipboard-list',
+                html: '<h3>Häirele reageerimine</h3><ul><li><strong style="color:#cc0000;">Auto põleb:</strong> 1 tuletõrjeauto</li><li><strong style="color:#cc0000;">Elamu tulekahju:</strong> 3 tuletõrjeautot, 2 eriüksust, 1 juht, 1 kiirabi</li><li><strong style="color:#cc0000;">Lennukiõnnetus:</strong> 1 tuletõrjeauto, 1 ARFF, 1 kiirabi, 1 juht</li><li><strong style="color:#cc0000;">Ohtlik aine (HazMat):</strong> 1 HazMat üksus + toetus</li></ul><h3>Raadiokoodid (10-Codes)</h3><div class="code-grid"><div class="code-item"><span>10-4</span> Sõnum vastu</div><div class="code-item"><span>10-20</span> Asukoht</div><div class="code-item"><span>10-70</span> Abi vaja</div><div class="code-item"><span>10-71</span> Kiirabi vaja</div><div class="code-item"><span>10-99</span> Stsenaarium lõppenud</div></div><h3>Staatused</h3><ul><li><strong style="color:#cc0000;">Status 2:</strong> Valves</li><li><strong style="color:#cc0000;">Status 4:</strong> Patrull — valmis</li><li><strong style="color:#cc0000;">Status 5e:</strong> Kiirsõit (sireen + tuli)</li><li><strong style="color:#cc0000;">Status 6:</strong> Kohal</li></ul>'
+            },
+            commands: {
+                title: 'Käsud',
+                icon: 'fa-terminal',
+                html: '<ul><li><code style="color:#cc0000;">/r</code> või <code style="color:#cc0000;">/radio</code> — fraktsiooni raadio</li><li><code style="color:#cc0000;">/d</code> või <code style="color:#cc0000;">/department</code> — sisekanal (LSFD)</li><li><code style="color:#cc0000;">/heal [nimi]</code> — patsiendi ravimine (ainult sõidukis)</li><li><code style="color:#cc0000;">/breakin</code> — ukse avamine hädaolukorras</li><li><code style="color:#cc0000;">/duty</code> — valvele / valve alt</li><li><code style="color:#cc0000;">/ems</code> — meditsiinitööriistad</li></ul><div class="highlight-box"><i class="fas fa-info-circle"></i>Kõik käsud võivad serveriti erineda — kontrolli oma serveri skripte.</div>'
+            },
+            equipment: {
+                title: 'Varustus',
+                icon: 'fa-truck',
+                html: '<h3><i class="fas fa-fire-engine" style="color:#cc0000;"></i> Sõidukid</h3><ul><li><strong style="color:#cc0000;">Tuletõrjeauto (Engine):</strong> Peamine tulekustutus</li><li><strong style="color:#cc0000;">Kiirabiauto (Ambulance):</strong> Patsiendi transport</li><li><strong style="color:#cc0000;">Juhtimissõiduk (Command SUV):</strong> Juhtkond</li><li><strong style="color:#cc0000;">Päästepaat (Fire Boat):</strong> Veesõidukid</li><li><strong style="color:#cc0000;">ARFF:</strong> Lennujaama päästesõiduk</li></ul><h3><i class="fas fa-tools" style="color:#cc0000;"></i> Isiklik varustus</h3><ul><li><strong style="color:#cc0000;">Kaitsevarustus:</strong> Kiiver, tulekindel riietus, SCBA</li><li><strong style="color:#cc0000;">Tööriistad:</strong> Kirves, voolik, päästerõngas, esmaabikomplekt, AED</li><li><strong style="color:#cc0000;">Side:</strong> Raadiojaam, telefon (IC)</li></ul>'
+            },
+            recruitment: {
+                title: 'Värbamine',
+                icon: 'fa-user-plus',
+                html: '<div class="recruit-box"><i class="fas fa-clipboard-list"></i><h3>Kuidas liituda?</h3><p><span class="highlight">1.</span> Täida avaldus meie <strong style="color:#cc0000;">Discordis</strong>.<br /><span class="highlight">2.</span> Pärast heakskiitu tee oma tegelane <strong style="color:#cc0000;">EMS-i valvelauas</strong> (in-game).<br /><span class="highlight">3.</span> Alusta kadetina ja tõuse auastmetes!</p><p style="margin-top:16px; font-size:12px; color:#666;"><i class="fas fa-chevron-right" style="color:#cc0000;"></i> Kõik avaldused vaadatakse üle 48h jooksul.</p></div>'
+            }
+        };
+
+        // ===== DOM ELEMENDID =====
+        var hero = document.getElementById('hero');
+        var contentArea = document.getElementById('content-area');
+        var contentDisplay = document.getElementById('content-display');
+        var backBtn = document.getElementById('backBtn');
+
+        // ===== FUNKTSIOON: SISU NÄITAMINE =====
+        function showContent(sectionKey) {
+            var data = contentData[sectionKey];
+            if (!data) return;
+
+            contentArea.classList.remove('hidden');
+            contentArea.classList.remove('hiding');
+
+            hero.classList.add('compact');
+            contentArea.classList.add('active');
+
+            contentDisplay.innerHTML = '<h2><i class="fas ' + data.icon + '"></i> ' + data.title + '</h2>' + data.html;
+
+            setTimeout(function() {
+                contentArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 300);
+
+            contentDisplay.style.animation = 'none';
+            requestAnimationFrame(function() {
+                contentDisplay.style.animation = 'zoomIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards';
+            });
+        }
+
+        // ===== FUNKTSIOON: TAGASI AVALEHELE =====
+        function goHome() {
+            contentArea.classList.add('hiding');
+            contentArea.classList.remove('active');
+
+            setTimeout(function() {
+                hero.classList.remove('compact');
+                contentArea.classList.remove('hiding');
+                contentArea.classList.add('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 400);
+        }
+
+        // ===== EVENTID: MENÜÜ NUPPUD =====
+        var buttons = document.querySelectorAll('.hero-menu button');
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].addEventListener('click', function() {
+                var section = this.dataset.section;
+                showContent(section);
+            });
+        }
+
+        // ===== EVENT: TAGASI NUPP =====
+        backBtn.addEventListener('click', goHome);
+
+        // ===== KEYBOARD: ESC =====
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && contentArea.classList.contains('active')) {
+                goHome();
+            }
+        });
+    </script>
+
+</body>
+</html>
