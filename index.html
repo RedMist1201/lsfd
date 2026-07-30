@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>LSFD - Los Santos Fire Department</title>
+    <title>LSFD - Värbamine</title>
 
     <!-- Google Font: Orbitron -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,7 +61,6 @@
             min-height: 100vh;
         }
 
-        /* --- MAIN LEHT: VERTIKAALNE (logo peal, tekst all) --- */
         #hero .hero-left {
             display: flex;
             flex-direction: column;
@@ -93,15 +92,6 @@
 
         #hero h1 span {
             color: #cc0000;
-        }
-
-        #hero .subtitle {
-            font-weight: 400;
-            font-size: 16px;
-            letter-spacing: 6px;
-            color: #666;
-            margin-top: 8px;
-            transition: all 0.8s ease;
         }
 
         #hero .badge-hero {
@@ -139,7 +129,6 @@
             margin: 0;
         }
 
-        /* --- HEADER: HORISONTAALNE (logo + tekst kõrvuti) --- */
         #hero.compact .hero-left {
             display: flex;
             flex-direction: row;
@@ -163,7 +152,6 @@
             letter-spacing: 3px;
         }
 
-        #hero.compact .subtitle,
         #hero.compact .badge-hero {
             display: none;
         }
@@ -352,125 +340,6 @@
             margin-right: 10px;
         }
 
-        .content-card .highlight-box code {
-            color: #cc0000;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 600;
-            background: #1a1a1a;
-            padding: 2px 12px;
-            border-radius: 4px;
-            font-size: 13px;
-            letter-spacing: 1px;
-        }
-
-        /* Auastmed */
-        .rank-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 14px;
-            margin: 16px 0;
-        }
-
-        .rank-item {
-            background: #0a0a0a;
-            padding: 16px 20px;
-            border-radius: 6px;
-            border-left: 4px solid #cc0000;
-            transition: all 0.3s;
-            text-align: center;
-        }
-
-        .rank-item:hover {
-            background: #141414;
-            transform: scale(1.02);
-            box-shadow: 0 0 30px rgba(200, 0, 0, 0.1);
-        }
-
-        .rank-item strong {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            color: #ffffff;
-            font-size: 15px;
-            letter-spacing: 1px;
-        }
-
-        .rank-item small {
-            display: block;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 400;
-            color: #888;
-            font-size: 11px;
-            margin-top: 6px;
-            letter-spacing: 0.5px;
-        }
-
-        /* Käsud */
-        .code-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-            gap: 10px;
-            margin: 12px 0;
-        }
-
-        .code-item {
-            background: #0a0a0a;
-            padding: 12px 16px;
-            border-radius: 4px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 13px;
-            border: 1px solid #1a1a1a;
-            text-align: center;
-            transition: all 0.3s;
-        }
-
-        .code-item:hover {
-            border-color: #cc0000;
-            box-shadow: 0 0 20px rgba(200, 0, 0, 0.1);
-        }
-
-        .code-item span {
-            color: #cc0000;
-            font-weight: 700;
-        }
-
-        /* Värbamine */
-        .recruit-box {
-            background: linear-gradient(135deg, #0a0a0a, #1a0505);
-            border: 2px solid #cc0000;
-            border-radius: 8px;
-            padding: 28px 32px;
-            text-align: center;
-            box-shadow: 0 0 60px rgba(200, 0, 0, 0.05);
-        }
-
-        .recruit-box i {
-            font-size: 48px;
-            color: #cc0000;
-            margin-bottom: 16px;
-            animation: pulseGlow 3s infinite;
-        }
-
-        .recruit-box h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            color: #ffffff;
-            font-size: 20px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .recruit-box p {
-            font-size: 14px;
-            color: #aaaaaa;
-            max-width: 600px;
-            margin: 12px auto 0;
-        }
-
-        .recruit-box .highlight {
-            color: #cc0000;
-            font-weight: 700;
-        }
-
         /* ---------- TAGASI NUPP ---------- */
         .back-btn {
             background: transparent;
@@ -531,8 +400,6 @@
             #hero.compact .hero-menu button { font-size: 7px; padding: 4px 8px; letter-spacing: 0.5px; }
             .content-card { padding: 24px 18px; }
             .content-card h2 { font-size: 20px; flex-wrap: wrap; }
-            .rank-grid { grid-template-columns: 1fr; }
-            .code-grid { grid-template-columns: 1fr 1fr; }
             #hero.compact { padding: 8px 12px; flex-wrap: wrap; gap: 6px; }
             #hero.compact .hero-left { flex-wrap: wrap; gap: 8px; }
             #hero { min-height: 90vh; padding: 20px; }
@@ -541,7 +408,6 @@
         @media (max-width: 480px) {
             #hero h1 { font-size: 20px; letter-spacing: 2px; }
             #hero .logo-icon img { width: 90px; }
-            .code-grid { grid-template-columns: 1fr; }
             .hero-menu { gap: 6px; }
             .hero-menu button { font-size: 8px; padding: 6px 10px; letter-spacing: 1px; }
             #hero.compact .hero-menu button { font-size: 6px; padding: 3px 6px; letter-spacing: 0px; }
@@ -559,19 +425,14 @@
     <div id="hero">
         <div class="hero-left">
             <div class="logo-icon">
-                <img src="logo.png" alt="LSFD Logo" />
+                <img src="img/logo.png" alt="LSFD Logo" />
             </div>
             <h1>Los Santos <span>Fire Department</span></h1>
         </div>
-        <span class="badge-hero"><i class="fas fa-shield-alt"></i> Esimesed rindel · Viimased kes lahkuvad <i class="fas fa-shield-alt"></i> </span>
+        <span class="badge-hero"><i class="fas fa-fire"></i> AMETLIK KODULEHT <i class="fas fa-fire"></i> </span>
         <div class="hero-menu">
-            <button data-section="mission"><i class="fas fa-bullseye"></i> Eesmärgid</button>
-            <button data-section="rules"><i class="fas fa-gavel"></i> Aukoodeks</button>
-            <button data-section="ranks"><i class="fas fa-chevron-up"></i> Struktuur</button>
-            <button data-section="procedures"><i class="fas fa-clipboard-list"></i> Töökorraldus</button>
-            <button data-section="commands"><i class="fas fa-terminal"></i> Abivahendid</button>
-            <button data-section="equipment"><i class="fas fa-truck"></i> Varustus</button>
-            <button data-section="recruitment"><i class="fas fa-user-plus"></i> Värbamine</button>
+            <button data-section="poster"><i class="fas fa-image"></i> Plakat</button>
+            <button data-section="candidate"><i class="fas fa-user-graduate"></i> Kandidaadile</button>
         </div>
     </div>
 
@@ -589,40 +450,15 @@
     <script>
         // ===== SISU ANDMED =====
         var contentData = {
-            mission: {
-                title: 'Eesmärgid',
-                icon: 'fa-bullseye',
-                html: '<p><strong style="color:#cc0000;">LSFD</strong> on Los Santose esimene kaitseliin. Meie jaoks pole ükski ülesanne keeruline</p><p>Oleme meeskond oma ala professionaale, kelle jaoks on linnaelanike turvalisus prioriteet number 1</p><div class="highlight-box"><i class="fas fa-quote-left"></i><em style="color:#cc0000; font-weight:600;">"ESIMESED RINDEL - VIIMASED KES LAHKUVAD"</em></div><ul><li><strong style="color:#cc0000;">Vaprus</strong> — astume ohtudele vastu, et teised saaksid elada</li><li><strong style="color:#cc0000;">Abivalmidus </strong> — Oleme valmis aitama kõiki, kes meie abi vajavad</li><li><strong style="color:#cc0000;">Pühendumus</strong> — Anname endast alati maksimumi, sõltumata olukorra keerukusest</li><li><strong style="color:#cc0000;">Professionaalsus</strong> — Töötame ühtse ja usaldusväärse meeskonnana, kus iga liige toetab teisi</li></ul>'
+            poster: {
+                title: 'Plakat',
+                icon: 'fa-image',
+                html: '<div style="text-align:center;"><img src="img/plakat.png" alt="LSFD Värbamisplakat" style="max-width:100%; height:auto; border-radius:8px; border:2px solid #cc0000; box-shadow: 0 0 60px rgba(200,0,0,0.1);" /></div>'
             },
-            rules: {
-                title: 'Aukoodeks',
-                icon: 'fa-gavel',
-                html: '<ul><li><strong style="color:#cc0000;">AUSTAN OMA AMETIT</strong> - Kannan LSFD vormi uhkusega ning esindan organisatsiooni väärikalt nii tööl olles kui ka väljaspool</li><li><strong style="color:#cc0000;">KAITSEN ELU</strong> - Minu peamine eesmärk on päästa elusid ja tagada inimeste ohutus</li><li><strong style="color:#cc0000;">JULGUS & ENESEVALITSUS</strong> - Ohtlikes olukordades säilitan külma närvi ning tegutsen läbimõeldult, seadmata ohtu kaaslasi ega kannatanuid</li><li><strong style="color:#cc0000;">AUSUS & ÕIGLUS</strong> - Ei kuritarvita oma ametipositsiooni ega usaldust mis sellega kaasneb</li><li><strong style="color:#cc0000;">PROFESSIONAALSUS</strong> - Kohtlen iga inimest võrdselt, sõltumata tema taustast, ametist või olukorrast. Austan ka teisi riigiasutusi ning teen nendega pidevat koostööd. Käitun ka igas olukorras väärikalt ja rahulikult. Minu suhtumine kujundab LSFD mainet</li><li><strong style="color:#cc0000;">KONFIDENTSIAALSUS</strong> - Ma ei avalda töö käigus saadud tundlikku teavet isikutele, kellel puudub selleks õigus</li><li><strong style="color:#cc0000;">ERAPOOLETUS</strong> - Teen oma tööd objektiivselt ning ei lase isiklikel suhetel, huvidel ega eelarvamustel mõjutada oma otsuseid</li></ul>'
-            },
-            ranks: {
-                title: 'Struktuur',
-                icon: 'fa-chevron-up',
-                html: '<h3><i class="fas fa-user-secret" style="color:#cc0000;"></i> JUHTKOND · KUTSUNG ALPHA</h3><div class="rank-grid"><div class="rank-item"><strong>A-01 Jackson Hendry</strong> <small>Chief of Department · Osakonna juht · Vastutab kogu LSFD tegevuse, juhtimise ja arendamise eest</small></div><div class="rank-item"><strong>A-02 ...</strong> <small>Deputy Chief · Chiefi asetäitja · Juhib osakonda Chiefi puudumisel ning koordineerib suuremaid operatsioone</small></div></div><div class="rank-grid"><div class="rank-item"><strong>A-03 ...</strong> <small>FTO Chief · Vastutab väljaõppe, akadeemia, instruktorite ja uute liikmete koolitamise eest</small></div><div class="rank-item"><strong>A-04 ....</strong> <small>Battalion Chief · Juhib operatiivtegevust · Jälgib meeskondade tööd ning vastutab sündmuste juhtimise eest</small></div></div><h3><i class="fas fa-user-secret" style="color:#cc0000;"></i> OHVITSERID · KUTSUNG LIMA</h3><div class="rank-grid"><div class="rank-item"><strong>L-05 ....</strong> <small>Captain - Päästekompanii juht · Korraldab vahetusi · Juhendab liikmeid ning teeb edutamise ettepanekuid</small></div><div class="rank-item"><strong>L-06 ....</strong> <small>Lieutenant · Vahetuse juht · Vastutab igapäevase töökorralduse ja meeskonna juhtimise eest</small></div></div><div class="rank-grid"><div class="rank-item"><strong>L-07 ...</strong> <small>Lead FTO · A-03 asetäitja · Korraldab õppuseid, hindamisi ja koolitusi · Jälgib aktiivselt FTO tööeetikat</small></div><div class="rank-item"><strong>L-08 ...</strong> <small>Field Training Officer · Tegeleb lisaks operatiivtööle ka liikmete treenimisega</small></div><div class="rank-item"><strong>L-09 ...</strong> <small>Field Training Officer · Tegeleb lisaks operatiivtööle ka liikmete treenimisega</small></div></div><h3><i class="fas fa-user-secret" style="color:#cc0000;"></i> OPERATIIVPERSONAL · KUTSUNG FOXTROT</h3><div class="rank-grid"><div class="rank-item"><strong>F-10 ...</strong> <small>Senior Firefighter · Kogenud päästja · Eeskujuks noorematele liikmetele ning toetab vahetuse juhtkonda igapäevases töös</small></div><div class="rank-item"><strong>F-11 ...</strong> <small>Senior Firefighter · Kogenud päästja · Eeskujuks noorematele liikmetele ning toetab vahetuse juhtkonda igapäevases töös</small></div><div class="rank-item"><strong>F-12 ...</strong> <small>Senior Firefighter · Kogenud päästja · Eeskujuks noorematele liikmetele ning toetab vahetuse juhtkonda igapäevases töös</small></div></div><div class="rank-grid"><div class="rank-item"><strong>F-13 ....</strong> <small>Firefighter II · Kogemustega päästja · Omab vajalike teadmisi ja kogemust iseseisvaks operatiivtööks</small></div><div class="rank-item"><strong>F-14 ....</strong> <small>Firefighter II · Kogemustega päästja · Omab vajalike teadmisi ja kogemust iseseisvaks operatiivtööks</small></div><div class="rank-item"><strong>F-15 ....</strong> <small>Firefighter II · Kogemustega päästja · Omab vajalike teadmisi ja kogemust iseseisvaks operatiivtööks</small></div><div class="rank-item"><strong>F-16 ....</strong> <small>Firefighter II · Kogemustega päästja · Omab vajalike teadmisi ja kogemust iseseisvaks operatiivtööks</small></div></div><div class="rank-grid"><div class="rank-item"><strong>F-17 ....</strong> <small>Firefighter II · Kogemustega päästja · Omab vajalike teadmisi ja kogemust iseseisvaks operatiivtööks</small></div><div class="rank-item"><strong>F-18 ....</strong> <small>Firefighter II · Kogemustega päästja · Omab vajalike teadmisi ja kogemust iseseisvaks operatiivtööks</small></div><div class="rank-item"><strong>F-19 ....</strong> <small>Firefighter II · Kogemustega päästja · Omab vajalike teadmisi ja kogemust iseseisvaks operatiivtööks</small></div><div class="rank-item"><strong>F-20 ....</strong> <small>Firefighter II · Kogemustega päästja · Omab vajalike teadmisi ja kogemust iseseisvaks operatiivtööks</small></div></div><div class="rank-grid"><div class="rank-item"><strong>F-21 ....</strong> <small>Firefighter II · Kogemustega päästja · Omab vajalike teadmisi ja kogemust iseseisvaks operatiivtööks</small></div><div class="rank-item"><strong>F-22 ....</strong> <small>Firefighter II · Kogemustega päästja · Omab vajalike teadmisi ja kogemust iseseisvaks operatiivtööks</small></div><div class="rank-item"><strong>F-23 ....</strong> <small>Firefighter II · Kogemustega päästja · Omab vajalike teadmisi ja kogemust iseseisvaks operatiivtööks</small></div><div class="rank-item"><strong>F-24 ....</strong> <small>Firefighter II · Kogemustega päästja · Omab vajalike teadmisi ja kogemust iseseisvaks operatiivtööks</small></div></div><div class="rank-grid"><div class="rank-item"><strong>F-25 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div><div class="rank-item"><strong>F-26 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div><div class="rank-item"><strong>F-27 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div><div class="rank-item"><strong>F-28 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div></div><div class="rank-grid"><div class="rank-item"><strong>F-29 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div><div class="rank-item"><strong>F-30 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div><div class="rank-item"><strong>F-31 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div><div class="rank-item"><strong>F-32 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div></div><div class="rank-grid"><div class="rank-item"><strong>F-33 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div><div class="rank-item"><strong>F-34 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div><div class="rank-item"><strong>F-35 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div><div class="rank-item"><strong>F-36 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div></div><div class="rank-grid"><div class="rank-item"><strong>F-37 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div><div class="rank-item"><strong>F-38 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div><div class="rank-item"><strong>F-39 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div><div class="rank-item"><strong>F-40 ....</strong> <small>Firefighter · Päästja · Omab baas teadmisi ja kogemust operatiivtööks</small></div></div><h3><i class="fas fa-user-secret" style="color:#cc0000;"></i> KATSEAJAL OPERATIIVPERSONAL · KUTSUNG FOXTROT</h3><div class="rank-grid"><div class="rank-item"><strong>F-41 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-42 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-43 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-44 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div></div><div class="rank-grid"><div class="rank-item"><strong>F-45 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-46 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-47 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-48 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div></div><div class="rank-grid"><div class="rank-item"><strong>F-49 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-50 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-51 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-52 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div></div><div class="rank-grid"><div class="rank-item"><strong>F-53 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-54 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-55 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-56 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div></div><div class="rank-grid"><div class="rank-item"><strong>F-57 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-58 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-59 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div><div class="rank-item"><strong>F-60 ....</strong> <small>Probationary Firefighter · Katseajal olev päästja</small></div></div><p style="font-size:13px; color:#888; text-align:center;">Edutamine toimub aktiivsuse, oskuste ja hoiaku alusel.</p>'
-            },
-            procedures: {
-                title: 'Töökorraldus',
-                icon: 'fa-clipboard-list',
-                html: '<h3>Raadioside kasutus</h3><ul><li>Tööpäeva alustades: Raadioside kanal <strong style="color:#cc0000;">1.7</strong></li><li>Raadiokoodide kasutus ei ole <strong style="color:#cc0000;">kohustuslik</strong>, kuid info kiiremaks edastamiseks on see <strong style="color:#cc0000;">soovituslik</strong></li><li>Sidesse liitudes teostada sidekontroll: <strong style="color:#cc0000;">"[Kutsung], Sidekontroll"</strong>. Vaste numbritega 1–5 (1 = väga halb kuuldavus, 5 = väga hea kuuldavus)</li><li>Sündmusele reageerimine: <strong style="color:#cc0000;">"[Kutsung], reageerib [väljakutse tüüp]"</strong></li><li>Sidekanal <strong style="color:#cc0000;">hoida puhtana</strong> — asjatundmatu jutt ja segamine ei ole lubatud</li><li>LSPD sidekanalites <strong style="color:#cc0000;">hoida puhtust</strong> — räägi ainult siis, kui olukord on rahunenud või kui ohvitser annab loa</li><li>Tööpäeva lõppedes sidelõpp: <strong style="color:#cc0000;">"[Kutsung] lõpetab vahetuse"</strong></li></ul><h3>Kood 0</h3><ul><li><strong style="color:#cc0000;">Kood 0</strong> — sündmusel toimub <strong style="color:#cc0000;">tulevahetus</strong></li><li>LSFD personal ei liigu <strong style="color:#cc0000;">kunagi</strong> tulevahetuse alale ilma <strong style="color:#cc0000;">LSPD</strong> kinnituseta, et ala on turvaline</li><li>Oota <strong style="color:#cc0000;">LSPD</strong> käsklust enne sisenemist</li><li>Kui satud tulevahetuse alla, <strong style="color:#cc0000;">tagane</strong> koheselt ja teavita <strong style="color:#cc0000;">LSPD-d</strong> oma situatsioonist</li><li>Kogu aeg hoia <strong style="color:#cc0000;">LSPD</strong> raadiokanalit kuulatavana, et olla kursis olukorra arenguga</li></ul><h3>Palgatiksumine</h3><ul><li>Depoos niisama logelemine ilma mõjuva tegevuseta on <strong style="color:#cc0000;">keelatud</strong></li><li>Töötajal on soovitav näidata üles <strong style="color:#cc0000;">aktiivsust</strong> ning kasutada aega mõistlikult</li><li>Võimalikud tegevused: <strong style="color:#cc0000;">hüdrantide kontroll</strong>, <strong style="color:#cc0000;">linnapeal patrullimine</strong>, <strong style="color:#cc0000;">varustuse hooldus</strong> või <strong style="color:#cc0000;">ennetustöö</strong> tsiviilisikutega</li></ul><h3>Tööajal on keelatud</h3><ul><li>Sireenidega ringi sõitmine ilma mõjuva põhjuseta</li><li>Alkoholi või narkootiliste ainete tarvitamine valve ajal</li><li>LSFD varustuse kasutamine isiklikel eesmärkidel</li><li>LSFD varustuse jagamine volitamata isikutele</li><li>Konfidentsiaalse info jagamine volitamata isikutega</li><li>Valeandmete edastamine raadioside vahendusel</li></ul><h3>Tööajal on lubatud</h3><ul><li>Isiklikud sõidud — pead olema <strong style="color:#cc0000;">reageerimisvalmis</strong> igaks väljakutseks</li><li>Pausi tegemine — määra tahvlis <strong style="color:#cc0000;">hõivatud staatus</strong> ning lahku sidest ajutiselt</li><li>Ennetav järelvalve — tähelepanu pööramine potentsiaalsetele ohuallikatele (kogunenud prügi, blokeeritud pääsud)</li><li>Kohalike elanikega suhtlemine — usalduse loomine ja kogukonnatöö</li><li>Hooldus- ja heakorratööd — sõidukite hooldus ja puhastus, vajadusel väiksemad remonditööd ning depoo ümbruse korrashoid</li><li>Koolitusmaterjalidega tutvumine — eneseareng ja uute oskuste omandamine</li></ul><h3>Raadiokoodid (10-Codes)</h3><div class="code-grid"><div class="code-item"><span>10-4</span> Sõnum vastuvõetud</div><div class="code-item"><span>10-20</span> Asukoht</div><div class="code-item"><span>10-70</span> Abi vaja</div><div class="code-item"><span>10-71</span> Kiirabi vaja</div><div class="code-item"><span>10-99</span> Stsenaarium lõppenud</div></div><h3>EMS Väljakutse tüübid</h3><div class="code-grid"><div class="code-item"><span>10-47</span> Vigastatud inimene</div><div class="code-item"><span>10-13A</span> Ohvitser vigastatud · Ligipääs raskendatud</div><div class="code-item"><span>10-13B</span> Ohvitser vigastatud · Reageerimine võimalik</div><div class="code-item"><span>10-14A</span> Meedik vigastatud · Ligipääs raskendatud</div><div class="code-item"><span>10-14B</span> Meedik vigastatud · Reageerimine võimalik</div></div>'
-            },
-            commands: {
-                title: 'Abivahendid',
-                icon: 'fa-terminal',
-                html: '<ul><li><strong style="color:#cc0000;">Raadio:</strong> Nupp <strong style="color:#cc0000;">O</strong></li><li><strong style="color:#cc0000;">Raadioinfo:</strong> ... (keybind määratud skriptis)</li><li><strong style="color:#cc0000;">Isiku liigutamine:</strong> /carry</li><li><strong style="color:#cc0000;">Isiku liigutamine [Alternatiiv]:</strong> F1 → EMS → Eskordi isikut</li><li><strong style="color:#cc0000;">Isiku autosse asetamine</strong>: [Ukse juures] <strong style="color:#cc0000;">3 silm</strong> (Left-Alt) → Aseta sõidukisse [Valitud iste]</li><li><strong style="color:#cc0000;">Isiku autosse asetamine [Alternatiiv]:</strong> [Sõiduki kõrval] F1 → EMS → Pane sõidukisse</li><li><strong style="color:#cc0000;">Isiku sõidukist väljavõtt:</strong> [Ukse juures] <strong style="color:#cc0000;">3 silm</strong> (Left-Alt) → eemalda sõidukist</li><li><strong style="color:#cc0000;">Isiku sõidukist väljavõtt [Alternatiiv]:</strong> Istu sõiduki juhiistmele -> F1 -> EMS -> Pane sõidukisse</li><li><strong style="color:#cc0000;">Sõiduki uste avamine (väljaspool sõidukit):</strong> [Ukse juures] <strong style="color:#cc0000;">3 silm</strong> (Left-Alt) vaadates ust</li><li><strong style="color:#cc0000;">State-ID / jalanumbri kontrollimine:</strong> Nupp <strong style="color:#cc0000;">U</strong></li><li><strong style="color:#cc0000;">MDT avamine:</strong> F1 → MDT</li></ul><div class="highlight-box"><i class="fas fa-info-circle"></i>Nupud võivad mängijatel erineda. Kontrollida Pause Menu -> Settings -> Key Bindide all </div>'
-            },
-            equipment: {
-                title: 'Varustus',
-                icon: 'fa-truck',
-                html: '<h3><i class="fas fa-fire-engine" style="color:#cc0000;"></i> Sõidukid</h3><ul><li><strong style="color:#cc0000;">Tuletõrjeauto (Engine):</strong> Peamine tulekustutus</li><li><strong style="color:#cc0000;">Kiirabiauto (Ambulance):</strong> Patsiendi transport</li><li><strong style="color:#cc0000;">Juhtimissõiduk (Command SUV):</strong> Juhtkond</li><li><strong style="color:#cc0000;">Päästepaat (Fire Boat):</strong> Veesõidukid</li><li><strong style="color:#cc0000;">ARFF:</strong> Lennujaama päästesõiduk</li></ul><h3><i class="fas fa-tools" style="color:#cc0000;"></i> Isiklik varustus</h3><ul><li><strong style="color:#cc0000;">Kaitsevarustus:</strong> Kiiver, tulekindel riietus, SCBA</li><li><strong style="color:#cc0000;">Tööriistad:</strong> Kirves, voolik, päästerõngas, esmaabikomplekt, AED</li><li><strong style="color:#cc0000;">Side:</strong> Raadiojaam, telefon (IC)</li></ul>'
-            },
-            recruitment: {
-                title: 'Värbamine',
-                icon: 'fa-user-plus',
-                html: '<div class="recruit-box"><i class="fas fa-clipboard-list"></i><h3>Kuidas liituda?</h3><p><span class="highlight">1.</span> Täida avaldus meie <strong style="color:#cc0000;">Discordis</strong>.<br /><span class="highlight">2.</span> Pärast heakskiitu tee oma tegelane <strong style="color:#cc0000;">EMS-i valvelauas</strong> (in-game).<br /><span class="highlight">3.</span> Alusta kadetina ja tõuse auastmetes!</p><p style="margin-top:16px; font-size:12px; color:#666;"><i class="fas fa-chevron-right" style="color:#cc0000;"></i> Kõik avaldused vaadatakse üle 48h jooksul.</p></div>'
+            candidate: {
+                title: 'Kandidaadile',
+                icon: 'fa-user-graduate',
+                html: '<h3>Sobid meile, kui sa...</h3><ul><li>Oled vähemalt <strong style="color:#cc0000;">18-aastane</strong></li><li>Omad <strong style="color:#cc0000;">puhast tausta</strong> või oled <strong style="color:#cc0000;">vähemalt 6-kuud kriminaalkaristuseta</strong></li><li>Tahad panustada Los Santose turvalisusse</li><li>Oled <strong style="color:#cc0000;">meeskonnamängija</strong></li></ul><h3>Mida me pakume?</h3><ul><li>Korralik väljaõpe</li><li>Karjäärivõimalus</li><li>Adrenaliinirohke töö</li><li>Toetav ja sõbralik meeskond</li><li>Tööle vastav palk</li></ul><h3>Kuidas ma tööle saan?</h3><div class="highlight-box"><i class="fas fa-chevron-right" style="color:#cc0000;"></i> <strong style="color:#cc0000;">1.</strong> Täida avaldus <strong style="color:#cc0000;">Pillbox Hill Medical Center</strong> fuajees<br /><i class="fas fa-chevron-right" style="color:#cc0000;"></i> <strong style="color:#cc0000;">2.</strong> Oota, kuni sinuga kontakteerutakse<br /><i class="fas fa-chevron-right" style="color:#cc0000;"></i> <strong style="color:#cc0000;">3.</strong> Kui avaldus on korralik — <strong style="color:#cc0000;">Kutsume töövestlusele</strong><br /><i class="fas fa-chevron-right" style="color:#cc0000;"></i> <strong style="color:#cc0000;">4.</strong> Oledki tööl. <strong style="color:#cc0000;">Nii lihtne see ongi!</strong></div><p style="text-align:center; margin-top:20px; color:#888; font-size:13px;"><i class="fas fa-clock" style="color:#cc0000;"></i> Avaldusi <strong style="color:#cc0000;">vaadatakse jooksvalt</strong>. Varuge kannatust — <strong style="color:#cc0000;">Keegi ei jää vastuseta</strong>.</p>'
             }
         };
 
