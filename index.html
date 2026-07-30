@@ -46,6 +46,11 @@
             50% { transform: translateY(-12px); }
         }
 
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
         /* ---------- ÜLDINE ---------- */
         #hero {
             display: flex;
@@ -340,6 +345,140 @@
             margin-right: 10px;
         }
 
+        /* ---------- GALERII ---------- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 10px;
+        }
+
+        .gallery-grid .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 6px;
+            border: 2px solid #1a1a1a;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            aspect-ratio: 16 / 9;
+            background: #0a0a0a;
+        }
+
+        .gallery-grid .gallery-item:hover {
+            border-color: #cc0000;
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(200, 0, 0, 0.15);
+        }
+
+        .gallery-grid .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-grid .gallery-item .no-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #444;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        /* ---------- LIGHTBOX ---------- */
+        #lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        #lightbox.active {
+            display: flex;
+        }
+
+        #lightbox .lb-close {
+            position: absolute;
+            top: 24px;
+            right: 32px;
+            color: #ffffff;
+            font-size: 32px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            background: none;
+            border: none;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        #lightbox .lb-close:hover {
+            color: #cc0000;
+            transform: rotate(90deg);
+        }
+
+        #lightbox .lb-image {
+            max-width: 90%;
+            max-height: 85%;
+            border-radius: 8px;
+            border: 2px solid #cc0000;
+            box-shadow: 0 0 80px rgba(200, 0, 0, 0.15);
+            object-fit: contain;
+        }
+
+        #lightbox .lb-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ffffff;
+            font-size: 48px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: none;
+            border: none;
+            font-family: 'Orbitron', sans-serif;
+            padding: 20px 12px;
+            z-index: 10;
+            user-select: none;
+        }
+
+        #lightbox .lb-nav:hover {
+            color: #cc0000;
+        }
+
+        #lightbox .lb-prev {
+            left: 20px;
+        }
+
+        #lightbox .lb-next {
+            right: 20px;
+        }
+
+        #lightbox .lb-counter {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #888;
+            font-size: 14px;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 8px 20px;
+            border-radius: 4px;
+            border: 1px solid #2a2a2a;
+        }
+
         /* ---------- TAGASI NUPP ---------- */
         .back-btn {
             background: transparent;
@@ -403,6 +542,9 @@
             #hero.compact { padding: 8px 12px; flex-wrap: wrap; gap: 6px; }
             #hero.compact .hero-left { flex-wrap: wrap; gap: 8px; }
             #hero { min-height: 90vh; padding: 20px; }
+            .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+            #lightbox .lb-nav { font-size: 32px; padding: 12px 8px; }
+            #lightbox .lb-close { top: 16px; right: 20px; font-size: 28px; }
         }
 
         @media (max-width: 480px) {
@@ -416,6 +558,10 @@
             .content-card { padding: 16px 12px; }
             .content-card h2 { font-size: 16px; }
             .content-card p, .content-card li { font-size: 12px; }
+            .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+            #lightbox .lb-nav { font-size: 24px; padding: 8px 4px; }
+            #lightbox .lb-close { top: 12px; right: 14px; font-size: 22px; }
+            #lightbox .lb-counter { font-size: 11px; padding: 4px 12px; bottom: 16px; }
         }
     </style>
 </head>
@@ -433,6 +579,7 @@
         <div class="hero-menu">
             <button data-section="poster"><i class="fas fa-image"></i> Plakat</button>
             <button data-section="candidate"><i class="fas fa-user-graduate"></i> Kandidaadile</button>
+            <button data-section="gallery"><i class="fas fa-images"></i> Galerii</button>
         </div>
     </div>
 
@@ -447,6 +594,15 @@
         </footer>
     </div>
 
+    <!-- ===== LIGHTBOX ===== -->
+    <div id="lightbox">
+        <button class="lb-close" id="lbClose">✕</button>
+        <button class="lb-nav lb-prev" id="lbPrev">‹</button>
+        <img class="lb-image" id="lbImage" src="" alt="Galerii pilt" />
+        <button class="lb-nav lb-next" id="lbNext">›</button>
+        <div class="lb-counter" id="lbCounter">1 / 1</div>
+    </div>
+
     <script>
         // ===== SISU ANDMED =====
         var contentData = {
@@ -459,8 +615,139 @@
                 title: 'Kandidaadile',
                 icon: 'fa-user-graduate',
                 html: '<h3>Sobid meile, kui sa...</h3><ul><li>Oled vähemalt <strong style="color:#cc0000;">18-aastane</strong></li><li>Omad <strong style="color:#cc0000;">puhast tausta</strong> või oled <strong style="color:#cc0000;">vähemalt 6-kuud kriminaalkaristuseta</strong></li><li>Tahad panustada Los Santose turvalisusse</li><li>Oled <strong style="color:#cc0000;">meeskonnamängija</strong></li></ul><h3>Mida me pakume?</h3><ul><li>Korralik väljaõpe</li><li>Karjäärivõimalus</li><li>Adrenaliinirohke töö</li><li>Toetav ja sõbralik meeskond</li><li>Tööle vastav palk</li></ul><h3>Kuidas ma tööle saan?</h3><div class="highlight-box"><i class="fas fa-chevron-right" style="color:#cc0000;"></i> <strong style="color:#cc0000;">1.</strong> Täida avaldus <strong style="color:#cc0000;">Pillbox Hill Medical Center</strong> fuajees<br /><i class="fas fa-chevron-right" style="color:#cc0000;"></i> <strong style="color:#cc0000;">2.</strong> Oota, kuni sinuga kontakteerutakse<br /><i class="fas fa-chevron-right" style="color:#cc0000;"></i> <strong style="color:#cc0000;">3.</strong> Kui avaldus on korralik — <strong style="color:#cc0000;">Kutsume töövestlusele</strong><br /><i class="fas fa-chevron-right" style="color:#cc0000;"></i> <strong style="color:#cc0000;">4.</strong> Oledki tööl. <strong style="color:#cc0000;">Nii lihtne see ongi!</strong></div><p style="text-align:center; margin-top:20px; color:#888; font-size:13px;"><i class="fas fa-clock" style="color:#cc0000;"></i> Avaldusi <strong style="color:#cc0000;">vaadatakse jooksvalt</strong>. Varuge kannatust — <strong style="color:#cc0000;">Keegi ei jää vastuseta</strong>.</p>'
+            },
+            gallery: {
+                title: 'Galerii',
+                icon: 'fa-images',
+                html: '<div id="galleryContainer"><div class="gallery-grid" id="galleryGrid"></div></div>'
             }
         };
+
+        // ===== GALERII FUNKTSIOONID =====
+        var galleryImages = [];
+        var currentImageIndex = 0;
+
+        function loadGallery() {
+            var grid = document.getElementById('galleryGrid');
+            if (!grid) return;
+
+            var imageCount = 0;
+            var maxImages = 50; 
+
+            // Proovi laadida pilte numbriga 1.jpg, 2.jpg, 3.jpg ... kuni maxImages
+            // Toetame .jpg, .jpeg, .png, .webp
+            var extensions = ['jpg', 'jpeg', 'png', 'webp'];
+            var loadedCount = 0;
+
+            function tryLoadImage(index) {
+                var found = false;
+                var extIndex = 0;
+
+                function tryNextExtension() {
+                    if (extIndex >= extensions.length) {
+                        // Kui ühtegi pilti ei leitud selle numbriga, lõpetame otsimise
+                        if (loadedCount === 0 && index === 1) {
+                            // Kui esimest pilti ei leitud, kuva sõnum
+                            grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:60px 20px; color:#666; font-size:14px; letter-spacing:2px;"><i class="fas fa-images" style="color:#cc0000; font-size:48px; display:block; margin-bottom:16px;"></i>Coming Soon<br></div>';
+                        }
+                        return;
+                    }
+
+                    var ext = extensions[extIndex];
+                    var imgPath = 'img/galerii/' + index + '.' + ext;
+
+                    var img = new Image();
+                    img.onload = function() {
+                        // Pilt leiti
+                        galleryImages.push(imgPath);
+                        loadedCount++;
+                        // Lisa pilt galeriisse
+                        var item = document.createElement('div');
+                        item.className = 'gallery-item';
+                        var imgEl = document.createElement('img');
+                        imgEl.src = imgPath;
+                        imgEl.alt = 'Galerii pilt ' + index;
+                        imgEl.loading = 'lazy';
+                        item.appendChild(imgEl);
+                        item.addEventListener('click', function() {
+                            openLightbox(galleryImages.length - 1);
+                        });
+                        grid.appendChild(item);
+
+                        // Proovi järgmist pilti
+                        tryLoadImage(index + 1);
+                    };
+                    img.onerror = function() {
+                        // Proovi järgmist laiendit
+                        extIndex++;
+                        tryNextExtension();
+                    };
+                    img.src = imgPath;
+                }
+
+                tryNextExtension();
+            }
+
+            // Alusta otsimist pildist 1
+            tryLoadImage(1);
+        }
+
+        // ===== LIGHTBOX =====
+        var lightbox = document.getElementById('lightbox');
+        var lbImage = document.getElementById('lbImage');
+        var lbCounter = document.getElementById('lbCounter');
+        var lbClose = document.getElementById('lbClose');
+        var lbPrev = document.getElementById('lbPrev');
+        var lbNext = document.getElementById('lbNext');
+
+        function openLightbox(index) {
+            if (galleryImages.length === 0) return;
+            currentImageIndex = index;
+            updateLightbox();
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function updateLightbox() {
+            if (galleryImages.length === 0) return;
+            lbImage.src = galleryImages[currentImageIndex];
+            lbCounter.textContent = (currentImageIndex + 1) + ' / ' + galleryImages.length;
+        }
+
+        function prevImage() {
+            if (galleryImages.length === 0) return;
+            currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+            updateLightbox();
+        }
+
+        function nextImage() {
+            if (galleryImages.length === 0) return;
+            currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+            updateLightbox();
+        }
+
+        // Lightbox eventid
+        lbClose.addEventListener('click', closeLightbox);
+        lbPrev.addEventListener('click', prevImage);
+        lbNext.addEventListener('click', nextImage);
+
+        // Klaviatuur
+        document.addEventListener('keydown', function(e) {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') prevImage();
+            if (e.key === 'ArrowRight') nextImage();
+        });
+
+        // Väljakuul klikkides sulge
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) closeLightbox();
+        });
 
         // ===== DOM ELEMENDID =====
         var hero = document.getElementById('hero');
@@ -480,6 +767,13 @@
             contentArea.classList.add('active');
 
             contentDisplay.innerHTML = '<h2><i class="fas ' + data.icon + '"></i> ' + data.title + '</h2>' + data.html;
+
+            // Kui galerii, siis lae pildid
+            if (sectionKey === 'gallery') {
+                setTimeout(function() {
+                    loadGallery();
+                }, 100);
+            }
 
             setTimeout(function() {
                 contentArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
